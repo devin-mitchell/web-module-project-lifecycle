@@ -2,6 +2,12 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import User from './User';
 import './App.css';
+import styled from 'styled-components'
+
+const Container = styled.div`
+  background: #711c91;
+  min-height: 100vh;
+`
 
 class App extends Component {
   state ={
@@ -11,14 +17,12 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('https://api.github.com/users/devin-mitchell')
-      .then(res => {
-        this.setState({
-          userData: res.data
-        })
+      .then((userRes) => {
         axios.get('https://api.github.com/users/devin-mitchell/followers')
-          .then(res => {
+          .then(followerRes => {
             this.setState({
-              followers: res.data
+              userData: userRes.data,
+              followers: followerRes.data
             })
           })
           .catch(err => {
@@ -32,12 +36,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Container className="App">
         <User 
           userData={this.state.userData}
           followers={this.state.followers}
         />
-      </div>
+      </Container>
     );
   }
 }

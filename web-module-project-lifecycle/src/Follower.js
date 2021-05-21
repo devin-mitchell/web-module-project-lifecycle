@@ -36,7 +36,6 @@ const FollowerContainer = styled.div`
     }
 `
 const Follower = (props) => { 
-    console.log(props.follower)
     return (
         <FollowerContainer>
             <img 

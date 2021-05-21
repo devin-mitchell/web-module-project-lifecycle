@@ -20,9 +20,12 @@ class App extends Component {
       .then((userRes) => {
         axios.get('https://api.github.com/users/devin-mitchell/followers')
           .then(followerRes => {
+            console.log(userRes)
+            console.log(followerRes)
             this.setState({
               userData: userRes.data,
               followers: followerRes.data
+              
             })
           })
           .catch(err => {
